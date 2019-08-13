@@ -1,6 +1,6 @@
 %check if compiled mex function already available
 dirconts=ls;
-if(isfile(fullfile(pwd,'exprtk_eval_mexw64'))==0)
+if(isfile(fullfile(pwd,'exprtk_eval.mexw64'))==0)
     mex exprtk_eval.cpp CFLAGS='$CFLAGS -Wa,-mbig-obj';
 end
 
