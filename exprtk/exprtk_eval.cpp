@@ -9,6 +9,12 @@
  * bar='ABC'    describes an array of characters in Matlab (e.g. class(baz)='char')
  */
 
+//define data types for exprtk
+typedef double T;
+typedef exprtk::symbol_table<T> symbol_table_t;
+typedef exprtk::expression<T>     expression_t;
+typedef exprtk::parser<T>             parser_t;
+
 void checkArguments(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
     //check number of input and output arguments
@@ -38,6 +44,24 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     char* input_buf=mxArrayToString(prhs[0]);
     //print something to the Matlab Console
     mexPrintf("Received c-style string: %s\n",input_buf);
+    
+    //time variable for exprtk expression
+    T t;
+    //symbol table for exprtk
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("t",t);
+    symbol_table.add_constants();
+    //exprtk expression
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+    //compile the expression
+    parser_t parser;
+    parser.compile(input_buf,expression);
+    
+    t=0.0;
+    double val=expression.value();
+    mexPrintf("Computed value at t=0: %f",val);
+    
     //create an mxArray of char to pass to Matlab
     mxArray* outputmx=mxCreateString(input_buf);
     //pass result to matlab
