@@ -1,6 +1,6 @@
 #include "mex.h"
 #include "matrix.h"
-#include <exprtk.hpp>
+#include "exprtk.hpp"
 
 /*
  * Usage:       [output]=echoString('TestString');
