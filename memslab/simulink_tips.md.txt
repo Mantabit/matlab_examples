@@ -1,0 +1,9 @@
+## Simulink Scopes ##
+### Multiple Plotting Planes (Subplots) ###
+Use `View/Layout` for generating subplot-like scope outputs.
+### Adjusting x- and y- axis ###
+Use `Tools/Aces-Scaling/Automatically Scale Axes Limits` to auto-scale y axes.
+## Initial Script ##
+In order to execute an initial script (for example for initializing values), save the corresponding initialization code in a script `model_setup.m`. Then set the **InitFcn** callback under `File/Model Properties/Callbacks` to (note no .m file-ending).
+
+    model_setup
