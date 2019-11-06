@@ -1,11 +1,13 @@
 %check if compiled mex function already available
 dirconts=ls;
-if(isfile(fullfile(pwd,'exprtk_eval.mexw64'))==0)
-    mex exprtk_eval.cpp CFLAGS='$CFLAGS -Wa,-mbig-obj';
-end
+%f(isfile(fullfile(pwd,'exprtk_eval.mexw64'))==0)
+%    mex exprtk_eval.cpp CFLAGS='$CFLAGS -Wa,-mbig-obj';
+%end
 
-ts=linspace(0,10,1000);
-expression='switch{case t<1: 1;case t<2: 2; default: 5*sin(t)*exp(-t);}';
+ts=linspace(0,20,5000);
+%text="switch{case t<10: 10000*t/10*sin(2*pi*0*t);default:
+%10000*sin(2*pi*0*t);}"
+expression='sin(t*(t*10/20))';
 ys=exprtk_eval(expression,ts);
 
 if any(isnan(ys))
